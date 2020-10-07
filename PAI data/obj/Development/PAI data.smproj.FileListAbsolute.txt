@@ -1,0 +1,13 @@
+C:\Users\8093aha\Documents\GitHub\PAI-database\PAI data\bin\PAI database.asdatabase
+C:\Users\8093aha\Documents\GitHub\PAI-database\PAI data\bin\PAI database.deploymenttargets
+C:\Users\8093aha\Documents\GitHub\PAI-database\PAI data\bin\PAI database.deploymentoptions
+C:\Users\8093aha\Documents\GitHub\PAI-database\PAI data\obj\Development\PAI database.asdatabase
+C:\Users\8093aha\Documents\GitHub\PAI-database\PAI data\obj\Development\PAI database.deploymentoptions
+C:\Users\8093aha\Documents\GitHub\PAI-database\PAI data\obj\Development\PAI database.deploymenttargets
+C:\Users\vk300\Documents\GitHub\PAI-database\PAI data\bin\PAI database.asdatabase
+C:\Users\vk300\Documents\GitHub\PAI-database\PAI data\bin\PAI database.deploymenttargets
+C:\Users\vk300\Documents\GitHub\PAI-database\PAI data\bin\PAI database.deploymentoptions
+C:\Users\vk300\Documents\GitHub\PAI-database\PAI data\obj\Development\PAI data.smproj.CoreCompileInputs.cache
+C:\Users\vk300\Documents\GitHub\PAI-database\PAI data\obj\Development\PAI database.asdatabase
+C:\Users\vk300\Documents\GitHub\PAI-database\PAI data\obj\Development\PAI database.deploymentoptions
+C:\Users\vk300\Documents\GitHub\PAI-database\PAI data\obj\Development\PAI database.deploymenttargets

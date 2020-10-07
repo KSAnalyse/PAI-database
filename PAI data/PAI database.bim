@@ -1,0 +1,988 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1400,
+  "model": {
+    "culture": "nb-NO",
+    "dataSources": [
+      {
+        "type": "structured",
+        "name": "SQL/ks-sql2018;Reporting_PAI",
+        "connectionDetails": {
+          "protocol": "tds",
+          "address": {
+            "server": "vk-sxd0e-002",
+            "database": "Reporting_PAI"
+          },
+          "authentication": null,
+          "query": null
+        },
+        "options": {},
+        "credential": {
+          "AuthenticationKind": "Windows",
+          "kind": "SQL",
+          "path": "vk-sxd0e-002;Reporting_PAI",
+          "Username": "axel.hjelmervik.hansen@ks.no",
+          "EncryptConnection": false
+        }
+      }
+    ],
+    "tables": [
+      {
+        "name": "Alle Data",
+        "isHidden": true,
+        "columns": [
+          {
+            "name": "Tabell",
+            "dataType": "string",
+            "sourceColumn": "Tabell"
+          },
+          {
+            "name": "Kommunenummer",
+            "dataType": "string",
+            "sourceColumn": "Kommunenummer"
+          },
+          {
+            "name": "Variabel",
+            "dataType": "string",
+            "sourceColumn": "Variabel"
+          },
+          {
+            "name": "Kjønnkode",
+            "dataType": "string",
+            "sourceColumn": "Kjønnkode"
+          },
+          {
+            "name": "Kompetansenivåkode",
+            "dataType": "string",
+            "sourceColumn": "Kompetansenivåkode"
+          },
+          {
+            "name": "Sektorkode",
+            "dataType": "string",
+            "sourceColumn": "Sektorkode"
+          },
+          {
+            "name": "År",
+            "dataType": "int64",
+            "sourceColumn": "År"
+          },
+          {
+            "name": "Verdi",
+            "dataType": "double",
+            "sourceColumn": "Verdi"
+          },
+          {
+            "name": "Turnuskode",
+            "dataType": "string",
+            "sourceColumn": "Turnuskode"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ks-sql2018;Reporting_PAI\",",
+                "    #\"dbo_Alle Data\" = Source{[Schema=\"dbo\",Item=\"Alle Data\"]}[Data]",
+                "in",
+                "    #\"dbo_Alle Data\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Kjønn",
+        "columns": [
+          {
+            "name": "Kjønnkode",
+            "dataType": "string",
+            "sourceColumn": "Kjønnkode"
+          },
+          {
+            "name": "Kjønnnavn",
+            "dataType": "string",
+            "sourceColumn": "Kjønnnavn"
+          },
+          {
+            "name": "KjønnkodeNavn",
+            "dataType": "string",
+            "sourceColumn": "KjønnkodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ks-sql2018;Reporting_PAI\",",
+                "    dbo_Kjønn = Source{[Schema=\"dbo\",Item=\"Kjønn\"]}[Data]",
+                "in",
+                "    dbo_Kjønn"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Kompetansenivå",
+        "columns": [
+          {
+            "name": "Kompetansenivåkode",
+            "dataType": "string",
+            "sourceColumn": "Kompetansenivåkode"
+          },
+          {
+            "name": "Kompetansenivånavn",
+            "dataType": "string",
+            "sourceColumn": "Kompetansenivånavn"
+          },
+          {
+            "name": "KompetansenivåkodeNavn",
+            "dataType": "string",
+            "sourceColumn": "KompetansenivåkodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ks-sql2018;Reporting_PAI\",",
+                "    dbo_Kompetansenivå = Source{[Schema=\"dbo\",Item=\"Kompetansenivå\"]}[Data]",
+                "in",
+                "    dbo_Kompetansenivå"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "PAI Indikatorer",
+        "columns": [
+          {
+            "name": "Indikatorer",
+            "dataType": "int64",
+            "sourceColumn": "Indikatorer"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ks-sql2018;Reporting_PAI\",",
+                "    #\"dbo_PAI Indikatorer\" = Source{[Schema=\"dbo\",Item=\"PAI Indikatorer\"]}[Data]",
+                "in",
+                "    #\"dbo_PAI Indikatorer\""
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Årsverk",
+            "expression": [
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"PAI01\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Årsverk\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Årsverk, alle sektorer, ufilter",
+            "expression": [
+              "",
+              "CALCULATE([Årsverk],",
+              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"I alt\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Årsverk, Helse/pleie/omsorg, ufilter",
+            "expression": [
+              "",
+              "CALCULATE([Årsverk],",
+              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Helse/pleie/omsorg\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Årsverk, Administrasjon, ufilter",
+            "expression": [
+              "",
+              "CALCULATE([Årsverk],",
+              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Administrasjon\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Årsverk, Barnehage, ufilter",
+            "expression": [
+              "",
+              "CALCULATE([Årsverk],",
+              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Barnehage\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Årsverk, Annet, ufilter",
+            "expression": [
+              "",
+              "CALCULATE([Årsverk],",
+              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Annet\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Årsverk, Samferdsel og teknikk, ufilter",
+            "expression": [
+              "",
+              "CALCULATE([Årsverk],",
+              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Samferdsel og teknikk\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Årsverk, Undervisning, ufilter",
+            "expression": [
+              "",
+              "CALCULATE([Årsverk],",
+              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Undervisning\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Årsverk, barnehage",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Årsverk, Barnehage, ufilter],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Kompetansenivå'[Kompetansenivånavn]), [Kompetansenivånavn] = \"Alle\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Årsverk, administrasjon",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Årsverk, Administrasjon, ufilter],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Kompetansenivå'[Kompetansenivånavn]), [Kompetansenivånavn] = \"Alle\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Årsverk, annet",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Årsverk, Annet, ufilter],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Kompetansenivå'[Kompetansenivånavn]), [Kompetansenivånavn] = \"Alle\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Årsverk, helse/pleie/omsorg",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Årsverk, Helse/pleie/omsorg, ufilter],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Kompetansenivå'[Kompetansenivånavn]), [Kompetansenivånavn] = \"Alle\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Årsverk, samferdsel og teknikk",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Årsverk, Samferdsel og teknikk, ufilter],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Kompetansenivå'[Kompetansenivånavn]), [Kompetansenivånavn] = \"Alle\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Årsverk, undervisning",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Årsverk, Undervisning, ufilter],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Kompetansenivå'[Kompetansenivånavn]), [Kompetansenivånavn] = \"Alle\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Årsverk, alle sektorer",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Årsverk, alle sektorer, ufilter],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Kompetansenivå'[Kompetansenivånavn]), [Kompetansenivånavn] = \"Alle\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Stillingsstørrelse",
+            "expression": [
+              "",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"PAI02\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Stillingsstørrelse\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Stillingsstørrelse, alle sektorer, ufilter",
+            "expression": [
+              "",
+              "CALCULATE([Stillingsstørrelse],",
+              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"I alt\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Stillingsstørrelse, Administrasjon, ufilter",
+            "expression": [
+              "",
+              "CALCULATE([Stillingsstørrelse],",
+              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Administrasjon\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Stillingsstørrelse, Annet, ufilter",
+            "expression": [
+              "",
+              "CALCULATE([Stillingsstørrelse],",
+              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Annet\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Stillingsstørrelse, Barnehage, ufilter",
+            "expression": [
+              "",
+              "CALCULATE([Stillingsstørrelse],",
+              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Barnehage\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Stillingsstørrelse, Helse/pleie/omsorg, ufilter",
+            "expression": [
+              "",
+              "CALCULATE([Stillingsstørrelse],",
+              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Helse/pleie/omsorg\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Stillingsstørrelse, Samferdsel og teknikk, ufilter",
+            "expression": [
+              "",
+              "CALCULATE([Stillingsstørrelse],",
+              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Samferdsel og teknikk\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Stillingsstørrelse, Undervisning, ufilter",
+            "expression": [
+              "",
+              "CALCULATE([Stillingsstørrelse],",
+              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Undervisning\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Stillingsstørrelse, alle sektorer",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Stillingsstørrelse, alle sektorer, ufilter],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Kompetansenivå'[Kompetansenivånavn]), [Kompetansenivånavn] = \"Alle\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Stillingsstørrelse, administrasjon",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Stillingsstørrelse, Administrasjon, ufilter],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Kompetansenivå'[Kompetansenivånavn]), [Kompetansenivånavn] = \"Alle\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Stillingsstørrelse, annet",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Stillingsstørrelse, Annet, ufilter],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Kompetansenivå'[Kompetansenivånavn]), [Kompetansenivånavn] = \"Alle\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Stillingsstørrelse, barnehage",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Stillingsstørrelse, Barnehage, ufilter],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Kompetansenivå'[Kompetansenivånavn]), [Kompetansenivånavn] = \"Alle\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Stillingsstørrelse, helse/pleie/omsorg",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Stillingsstørrelse, Helse/pleie/omsorg, ufilter],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Kompetansenivå'[Kompetansenivånavn]), [Kompetansenivånavn] = \"Alle\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Stillingsstørrelse, samferdsel og teknikk",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Stillingsstørrelse, Samferdsel og teknikk, ufilter],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Kompetansenivå'[Kompetansenivånavn]), [Kompetansenivånavn] = \"Alle\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Stillingsstørrelse, undervisning",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Stillingsstørrelse, Undervisning, ufilter],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Kompetansenivå'[Kompetansenivånavn]), [Kompetansenivånavn] = \"Alle\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Heltidsandel",
+            "expression": [
+              "",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"PAI03\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Heltidsandel\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Heltidsandel, alle sektorer, ufilter",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Heltidsandel],",
+              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"I alt\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Heltidsandel, administrasjon, ufilter",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Heltidsandel],",
+              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Administrasjon\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Heltidsandel, annet, ufilter",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Heltidsandel],",
+              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Annet\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Heltidsandel, barnehage, ufilter",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Heltidsandel],",
+              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Barnehage\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Heltidsandel, helse/pleie/omsorg, ufilter",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Heltidsandel],",
+              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Helse/pleie/omsorg\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Heltidsandel, samferdsel og teknikk, ufilter",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Heltidsandel],",
+              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Samferdsel og teknikk\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Heltidsandel, undervisning, ufilter",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Heltidsandel],",
+              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Undervisning\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Heltidsandel, alle sektorer",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Heltidsandel, alle sektorer, ufilter],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Kompetansenivå'[Kompetansenivånavn]), [Kompetansenivånavn] = \"Alle\"),",
+              "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Heltidsandel, administrasjon",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Heltidsandel, administrasjon, ufilter],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Kompetansenivå'[Kompetansenivånavn]), [Kompetansenivånavn] = \"Alle\"),",
+              "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Heltidsandel, annet",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Heltidsandel, annet, ufilter],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Kompetansenivå'[Kompetansenivånavn]), [Kompetansenivånavn] = \"Alle\"),",
+              "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Heltidsandel, barnehage",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Heltidsandel, barnehage, ufilter],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Kompetansenivå'[Kompetansenivånavn]), [Kompetansenivånavn] = \"Alle\"),",
+              "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Heltidsandel, helse/pleie/omsorg",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Heltidsandel, helse/pleie/omsorg, ufilter],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Kompetansenivå'[Kompetansenivånavn]), [Kompetansenivånavn] = \"Alle\"),",
+              "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Heltidsandel, samferdsel og teknikk",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Heltidsandel, samferdsel og teknikk, ufilter],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Kompetansenivå'[Kompetansenivånavn]), [Kompetansenivånavn] = \"Alle\"),",
+              "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Heltidsandel, undervisning",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Heltidsandel, undervisning, ufilter],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Kompetansenivå'[Kompetansenivånavn]), [Kompetansenivånavn] = \"Alle\"),",
+              "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
+              ")"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Region",
+        "columns": [
+          {
+            "name": "Kode",
+            "dataType": "string",
+            "sourceColumn": "Kode"
+          },
+          {
+            "name": "Navn",
+            "dataType": "string",
+            "sourceColumn": "Navn"
+          },
+          {
+            "name": "KodeNummernavn",
+            "dataType": "string",
+            "sourceColumn": "KodeNummernavn"
+          },
+          {
+            "name": "Regionnummer",
+            "dataType": "string",
+            "sourceColumn": "Regionnummer"
+          },
+          {
+            "name": "Kategori",
+            "dataType": "string",
+            "sourceColumn": "Kategori"
+          },
+          {
+            "name": "GyldigFraDato",
+            "dataType": "dateTime",
+            "sourceColumn": "GyldigFraDato"
+          },
+          {
+            "name": "GyldigTilDato",
+            "dataType": "dateTime",
+            "sourceColumn": "GyldigTilDato"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ks-sql2018;Reporting_PAI\",",
+                "    dbo_Region = Source{[Schema=\"dbo\",Item=\"Region\"]}[Data]",
+                "in",
+                "    dbo_Region"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Tabeller",
+        "columns": [
+          {
+            "name": "Tabellnummer",
+            "dataType": "string",
+            "sourceColumn": "Tabellnummer"
+          },
+          {
+            "name": "Tabellnavn",
+            "dataType": "string",
+            "sourceColumn": "Tabellnavn"
+          },
+          {
+            "name": "TabellNummerNavn",
+            "dataType": "string",
+            "sourceColumn": "TabellNummerNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ks-sql2018;Reporting_PAI\",",
+                "    dbo_Tabeller = Source{[Schema=\"dbo\",Item=\"Tabeller\"]}[Data]",
+                "in",
+                "    dbo_Tabeller"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Sektor",
+        "columns": [
+          {
+            "name": "Sektorkode",
+            "dataType": "string",
+            "sourceColumn": "Sektorkode"
+          },
+          {
+            "name": "Sektornavn",
+            "dataType": "string",
+            "sourceColumn": "Sektornavn"
+          },
+          {
+            "name": "SektorkodeNavn",
+            "dataType": "string",
+            "sourceColumn": "SektorkodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ks-sql2018;Reporting_PAI\",",
+                "    dbo_Sektor = Source{[Schema=\"dbo\",Item=\"Sektor\"]}[Data]",
+                "in",
+                "    dbo_Sektor"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Variabel",
+        "columns": [
+          {
+            "name": "Variabelgruppe",
+            "dataType": "string",
+            "sourceColumn": "Variabelgruppe"
+          },
+          {
+            "name": "Variabel",
+            "dataType": "string",
+            "sourceColumn": "Variabel"
+          },
+          {
+            "name": "Variabelnavn",
+            "dataType": "string",
+            "sourceColumn": "Variabelnavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ks-sql2018;Reporting_PAI\",",
+                "    dbo_Variabel = Source{[Schema=\"dbo\",Item=\"Variabel\"]}[Data]",
+                "in",
+                "    dbo_Variabel"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "År",
+        "columns": [
+          {
+            "name": "År",
+            "dataType": "int64",
+            "sourceColumn": "År"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ks-sql2018;Reporting_PAI\",",
+                "    dbo_År = Source{[Schema=\"dbo\",Item=\"År\"]}[Data]",
+                "in",
+                "    dbo_År"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Turnus",
+        "columns": [
+          {
+            "name": "Turnuskode",
+            "dataType": "string",
+            "sourceColumn": "Turnuskode"
+          },
+          {
+            "name": "Turnusnavn",
+            "dataType": "string",
+            "sourceColumn": "Turnusnavn"
+          },
+          {
+            "name": "TurnuskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "TurnuskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ks-sql2018;Reporting_PAI\",",
+                "    dbo_Turnus = Source{[Schema=\"dbo\",Item=\"Turnus\"]}[Data]",
+                "in",
+                "    dbo_Turnus"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "f55b1254-add9-4ba5-b2d8-c552f827e35c",
+        "fromTable": "Alle Data",
+        "fromColumn": "Kommunenummer",
+        "toTable": "Region",
+        "toColumn": "Kode"
+      },
+      {
+        "name": "c9f1c408-a2b2-4bf8-a8f3-b95b85b0e22e",
+        "fromTable": "Alle Data",
+        "fromColumn": "Tabell",
+        "toTable": "Tabeller",
+        "toColumn": "Tabellnummer"
+      },
+      {
+        "name": "3efbfa39-ed84-4334-bb3a-bc1870c6395d",
+        "fromTable": "Alle Data",
+        "fromColumn": "År",
+        "toTable": "År",
+        "toColumn": "År"
+      },
+      {
+        "name": "329d1e85-f048-4bca-afdc-31491be2d6dd",
+        "fromTable": "Alle Data",
+        "fromColumn": "Variabel",
+        "toTable": "Variabel",
+        "toColumn": "Variabel"
+      },
+      {
+        "name": "e1de20ed-226e-44d8-9ed9-ea366432ce71",
+        "fromTable": "Alle Data",
+        "fromColumn": "Sektorkode",
+        "toTable": "Sektor",
+        "toColumn": "Sektorkode"
+      },
+      {
+        "name": "c271f5b7-030b-4e55-af23-3a4ce3d64599",
+        "fromTable": "Alle Data",
+        "fromColumn": "Kjønnkode",
+        "toTable": "Kjønn",
+        "toColumn": "Kjønnkode"
+      },
+      {
+        "name": "0edc0b76-541b-4446-a6dd-72c5be6de3b0",
+        "fromTable": "Alle Data",
+        "fromColumn": "Kompetansenivåkode",
+        "toTable": "Kompetansenivå",
+        "toColumn": "Kompetansenivåkode"
+      },
+      {
+        "name": "80dc50fd-8b0d-4f44-9f82-cd82e59c1a90",
+        "fromTable": "Alle Data",
+        "fromColumn": "Turnuskode",
+        "toTable": "Turnus",
+        "toColumn": "Turnuskode"
+      }
+    ],
+    "roles": [
+      {
+        "name": "API",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "NT AUTHORITY\\IUSR",
+            "memberId": "S-1-5-17"
+          }
+        ]
+      },
+      {
+        "name": "Brukere",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "I04\\VK.DB.VK-SXD0E-002_PAI.DBO",
+            "memberId": "S-1-5-21-2036031588-730629661-1306914269-1033620"
+          }
+        ]
+      },
+      {
+        "name": "Service",
+        "modelPermission": "readRefresh",
+        "members": [
+          {
+            "memberName": "I04\\vk-SvcASSS",
+            "memberId": "S-1-5-21-2036031588-730629661-1306914269-1034204"
+          }
+        ]
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "500"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}
