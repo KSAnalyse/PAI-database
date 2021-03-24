@@ -261,7 +261,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"I alt\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Heltidsandel"
           },
           {
             "name": "Årsverk alt",
@@ -293,7 +294,8 @@
               "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"PAI03\"),",
               "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Heltidsandel\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Heltidsandel"
           },
           {
             "name": "Stillingsstørrelse, barnehage",
@@ -944,7 +946,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Administrasjon\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Heltidsandel"
           },
           {
             "name": "Heltidsandel, annet",
@@ -957,7 +960,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Annet\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Heltidsandel"
           },
           {
             "name": "Heltidsandel, barnehage",
@@ -970,7 +974,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Barnehage\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Heltidsandel"
           },
           {
             "name": "Heltidsandel, helse/pleie/omsorg",
@@ -983,7 +988,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Helse/pleie/omsorg\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Heltidsandel"
           },
           {
             "name": "Heltidsandel, samferdsel og teknikk",
@@ -996,7 +1002,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Samferdsel og teknikk\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Heltidsandel"
           },
           {
             "name": "Heltidsandel, undervisning",
@@ -1009,7 +1016,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Undervisning\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Heltidsandel"
           },
           {
             "name": "Heltidsandel, faglærte",
@@ -1022,7 +1030,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"I alt\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Heltidsandel"
           },
           {
             "name": "Heltidsandel, høyere utdanning",
@@ -1035,7 +1044,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"I alt\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Heltidsandel"
           },
           {
             "name": "Heltidsandel, ufaglærte",
@@ -1048,7 +1058,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"I alt\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Heltidsandel"
           },
           {
             "name": "Heltidsandel, kvinner",
@@ -1061,7 +1072,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"I alt\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Heltidsandel"
           },
           {
             "name": "Heltidsandel, menn",
@@ -1074,7 +1086,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"I alt\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Heltidsandel"
           },
           {
             "name": "Heltidsandel, helse/pleie/omsorg, turnus",
@@ -1087,7 +1100,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Helse/pleie/omsorg\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Turnus\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Heltidsandel"
           },
           {
             "name": "Stillingsstørrelse, helse/pleie/omsorg, turnus",
