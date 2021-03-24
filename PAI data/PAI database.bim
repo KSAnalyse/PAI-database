@@ -74,6 +74,11 @@
             "name": "Turnuskode",
             "dataType": "string",
             "sourceColumn": "Turnuskode"
+          },
+          {
+            "name": "Næringkode",
+            "dataType": "string",
+            "sourceColumn": "Næringkode"
           }
         ],
         "partitions": [
@@ -197,6 +202,11 @@
             "name": "Turnover",
             "dataType": "int64",
             "sourceColumn": "Turnover"
+          },
+          {
+            "name": "Sykefravær",
+            "dataType": "int64",
+            "sourceColumn": "Sykefravær"
           }
         ],
         "partitions": [
@@ -237,76 +247,6 @@
               "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
               "    FILTER(ALL('Kompetansenivå'[Kompetansenivånavn]), [Kompetansenivånavn] = \"Alle\"),",
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Annet\")",
-              ")"
-            ]
-          },
-          {
-            "name": "Heltidsandel, alle sektorer, ufilter",
-            "expression": [
-              "",
-              "",
-              "CALCULATE([Heltidsandel alt],",
-              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"I alt\")",
-              ")"
-            ]
-          },
-          {
-            "name": "Heltidsandel, administrasjon, ufilter",
-            "expression": [
-              "",
-              "",
-              "CALCULATE([Heltidsandel alt],",
-              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Administrasjon\")",
-              ")"
-            ]
-          },
-          {
-            "name": "Heltidsandel, annet, ufilter",
-            "expression": [
-              "",
-              "",
-              "CALCULATE([Heltidsandel alt],",
-              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Annet\")",
-              ")"
-            ]
-          },
-          {
-            "name": "Heltidsandel, barnehage, ufilter",
-            "expression": [
-              "",
-              "",
-              "CALCULATE([Heltidsandel alt],",
-              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Barnehage\")",
-              ")"
-            ]
-          },
-          {
-            "name": "Heltidsandel, helse/pleie/omsorg, ufilter",
-            "expression": [
-              "",
-              "",
-              "CALCULATE([Heltidsandel alt],",
-              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Helse/pleie/omsorg\")",
-              ")"
-            ]
-          },
-          {
-            "name": "Heltidsandel, samferdsel og teknikk, ufilter",
-            "expression": [
-              "",
-              "",
-              "CALCULATE([Heltidsandel alt],",
-              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Samferdsel og teknikk\")",
-              ")"
-            ]
-          },
-          {
-            "name": "Heltidsandel, undervisning, ufilter",
-            "expression": [
-              "",
-              "",
-              "CALCULATE([Heltidsandel alt],",
-              "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Undervisning\")",
               ")"
             ]
           },
@@ -1160,6 +1100,236 @@
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Turnus\")",
               ")"
             ]
+          },
+          {
+            "name": "Sykefravær alt",
+            "expression": [
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"PAI06\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Sykefravær\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Sykefravær, i alt",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Sykefravær alt],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Næring'[Næringnavn]), [Næringnavn] = \"Alle næringer\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Sykefravær, andre omsorgsinstitusjoner samt bofellesskap",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Sykefravær alt],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Næring'[Næringnavn]), [Næringnavn] = \"Andre omsorgsinstitusjoner samt bofellesskap\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Sykefravær, barnehager",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Sykefravær alt],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Næring'[Næringnavn]), [Næringnavn] = \"Barnehager\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Sykefravær, drift av biblioteker, arkiver, muséer m.m.",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Sykefravær alt],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Næring'[Næringnavn]), [Næringnavn] = \"Drift av biblioteker, arkiver, muséer m.m.\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Sykefravær, helsetjenester",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Sykefravær alt],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Næring'[Næringnavn]), [Næringnavn] = \"Helsetjenester\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Sykefravær, helsetjenester ekskl. tannhelse",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Sykefravær alt],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Næring'[Næringnavn]), [Næringnavn] = \"Helsetjenester ekskl. tannhelse\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Sykefravær, kunstnerisk virks. og underholdningsvirks.",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Sykefravær alt],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Næring'[Næringnavn]), [Næringnavn] = \"Kunstnerisk virks. og underholdningsvirks.\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Sykefravær, off. adm. og trygdeordn. u/off. forv.",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Sykefravær alt],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Næring'[Næringnavn]), [Næringnavn] = \"Off. adm. og trygdeordn. u/off. forv.\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Sykefravær, off. adm., undervisning, helse- og omsorg samt kulturell virks.",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Sykefravær alt],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Næring'[Næringnavn]), [Næringnavn] = \"Off. adm., undervisning, helse- og omsorg samt kulturell virks.\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Sykefravær, off. adm., undervisning, helsetj. samt pleie og omsorg",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Sykefravær alt],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Næring'[Næringnavn]), [Næringnavn] = \"Off. adm., undervisning, helsetj. samt pleie og omsorg\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Sykefravær, off. adm., undervisning, tannhelsetj. samt kulturell virks.",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Sykefravær alt],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Næring'[Næringnavn]), [Næringnavn] = \"Off. adm., undervisning, tannhelsetj. samt kulturell virks.\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Sykefravær, pleie og omsorgstjenester i institusjon",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Sykefravær alt],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Næring'[Næringnavn]), [Næringnavn] = \"Pleie og omsorgstjenester i institusjon\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Sykefravær, sosiale omsorgstj. uten botilbud, ekskl. barnehager",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Sykefravær alt],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Næring'[Næringnavn]), [Næringnavn] = \"Sosiale omsorgstj. uten botilbud, ekskl. barnehager\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Sykefravær, tannhelsetjenester",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Sykefravær alt],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Næring'[Næringnavn]), [Næringnavn] = \"Tannhelsetjenester\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Sykefravær, undervisning",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Sykefravær alt],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Næring'[Næringnavn]), [Næringnavn] = \"Undervisning\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Sykefravær, undervisning, ekskl. videregående opplæring",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Sykefravær alt],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Næring'[Næringnavn]), [Næringnavn] = \"Undervisning, ekskl. videregående opplæring\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Sykefravær, videregående opplæring, allmennfaglig",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Sykefravær alt],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Næring'[Næringnavn]), [Næringnavn] = \"Videregående opplæring, allmennfaglig\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Sykefravær, videregående opplæring, yrkesfaglig",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Sykefravær alt],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner og menn\"),",
+              "    FILTER(ALL('Næring'[Næringnavn]), [Næringnavn] = \"Videregående opplæring, yrkesfaglig\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Sykefravær, kvinner",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Sykefravær alt],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Kvinner\"),",
+              "    FILTER(ALL('Næring'[Næringnavn]), [Næringnavn] = \"Alle næringer\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Sykefravær, menn",
+            "expression": [
+              "",
+              "",
+              "CALCULATE([Sykefravær alt],",
+              "    FILTER(ALL('Kjønn'[Kjønnnavn]), [Kjønnnavn] = \"Menn\"),",
+              "    FILTER(ALL('Næring'[Næringnavn]), [Næringnavn] = \"Alle næringer\")",
+              ")"
+            ]
           }
         ]
       },
@@ -1388,6 +1558,42 @@
             }
           }
         ]
+      },
+      {
+        "name": "Næring",
+        "columns": [
+          {
+            "name": "Næringkode",
+            "dataType": "string",
+            "sourceColumn": "Næringkode"
+          },
+          {
+            "name": "Næringnavn",
+            "dataType": "string",
+            "sourceColumn": "Næringnavn"
+          },
+          {
+            "name": "NæringkodeNavn",
+            "dataType": "string",
+            "sourceColumn": "NæringkodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"VK-SXD0E-002;Reporting_PAI\",",
+                "    dbo_Næring = Source{[Schema=\"dbo\",Item=\"Næring\"]}[Data]",
+                "in",
+                "    dbo_Næring"
+              ]
+            }
+          }
+        ]
       }
     ],
     "relationships": [
@@ -1446,6 +1652,13 @@
         "fromColumn": "Turnuskode",
         "toTable": "Turnus",
         "toColumn": "Turnuskode"
+      },
+      {
+        "name": "00df3dd4-7d55-48d9-82dd-c351fde58524",
+        "fromTable": "Alle Data",
+        "fromColumn": "Næringkode",
+        "toTable": "Næring",
+        "toColumn": "Næringkode"
       }
     ],
     "roles": [
