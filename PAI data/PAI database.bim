@@ -425,7 +425,8 @@
               "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"PAI04\"),",
               "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Ansatte\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Ansatte"
           },
           {
             "name": "Antall ansatte, i alt",
@@ -438,7 +439,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"I alt\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Ansatte"
           },
           {
             "name": "Antall ansatte, administrasjon",
@@ -451,7 +453,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Administrasjon\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Ansatte"
           },
           {
             "name": "Antall ansatte, annet",
@@ -464,7 +467,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Annet\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Ansatte"
           },
           {
             "name": "Antall ansatte, barnehage",
@@ -477,7 +481,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Barnehage\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Ansatte"
           },
           {
             "name": "Antall ansatte, helse/pleie/omsorg, turnus",
@@ -490,7 +495,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Helse/pleie/omsorg\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Turnus\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Ansatte"
           },
           {
             "name": "Antall ansatte, helse/pleie/omsorg",
@@ -503,7 +509,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Helse/pleie/omsorg\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Ansatte"
           },
           {
             "name": "Antall ansatte, samferdsel og teknikk",
@@ -516,7 +523,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Samferdsel og teknikk\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Ansatte"
           },
           {
             "name": "Antall ansatte, undervisning",
@@ -529,7 +537,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"Undervisning\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Ansatte"
           },
           {
             "name": "Antall ansatte, faglærte",
@@ -542,7 +551,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"I alt\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Ansatte"
           },
           {
             "name": "Antall ansatte, høyere utdanning",
@@ -555,7 +565,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"I alt\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Ansatte"
           },
           {
             "name": "Antall ansatte, ufaglærte",
@@ -568,7 +579,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"I alt\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Ansatte"
           },
           {
             "name": "Antall ansatte, kvinner",
@@ -581,7 +593,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"I alt\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Ansatte"
           },
           {
             "name": "Antall ansatte, menn",
@@ -594,7 +607,8 @@
               "    FILTER(ALL(Sektor[Sektornavn]), [Sektornavn] = \"I alt\"),",
               "    FILTER(ALL(Turnus[Turnusnavn]), [Turnusnavn] = \"Alle\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Ansatte"
           },
           {
             "name": "Årsverk, i alt",
